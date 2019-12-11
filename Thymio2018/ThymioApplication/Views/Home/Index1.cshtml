@@ -1,0 +1,93 @@
+﻿@using (Html.BeginForm("Submit", "MemberAddressForm", new { someParam = "some value" }, FormMethod.Post))
+{
+}
+
+<h2 class="text-center" style="margin-bottom:2em;">Programme ton robot Thymio</h2>
+
+<div>
+    <span class="label label-danger">@ViewData["Transfert"]</span>
+</div>
+
+<div class="container align-self-center">
+
+    <!-- Block du haut-->
+    <div class="row" style="margin-bottom:25px;">
+        <!-- List des fonctions-->
+        <div class="col-sm-3 container-fluid">
+            <h3 class="text-center">Fonctions</h3>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Forward</a>
+                <a href="#" class="list-group-item list-group-item-action">Backward</a>
+                <a href="#" class="list-group-item list-group-item-action">TurnRight</a>
+            </div>
+        </div>
+
+        <!-- Paramètre-->
+        <div class="col-sm-4 container" backgroud-color="black">
+            <h3 class="text-center">Paramètres d'une fonction</h3>
+            <div class="table-bordered"></div>
+            <div style="padding:20px;" class="table-bordered">
+                @{
+                    var function_name = "forward";
+                    var param_name = "speed";
+
+
+                    <h4 class="font-weight-bold text-capitalize">@function_name</h4>
+                    <form class="text-center" method="post">
+                        <label>@param_name</label>
+                        <input type="number" name="speed" max="600" min="-600" />
+                        <a asp-controller="Home" asp-action="AjouterInstruction" class="btn btn-success center-block" style="margin-top:20px;">Ajouter</a>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+        <!-- Listes des instructions -->
+        <div class="col-sm-5 container-fluid">
+            <h3 class="text-center"> Listes d'instructions</h3>
+            <div class="table-bordered"> </div>
+            <div>
+                
+                @if (Model != null && (string)ViewData["isDataFile"]!="true" )
+                {
+                    foreach (string val in Model)
+                    {
+                        <p>@val.</p>
+                    }
+                }
+                else
+                {
+
+
+                }
+
+            </div>
+            <a asp-controller="Home" asp-action="Transformer" class="btn btn-success center-block" style="margin-top:20px;">Transformer</a>
+        </div>
+    </div>
+
+    <!-- Le code généré -->
+    <div class="container-fluid">
+        <h3 class="text-center"> Code généré</h3>
+        <div class="table-bordered container-fluid" height="200px">
+            <div style="padding:20px;">
+                @*<object data="~/FichierAseba/base.txt" style="width:100%; min-height:200px; max-height:500px; overflow:hidden;"> ></object>*@
+                @if (Model != null && (string)ViewData["isDataFile"] == "true")
+                 {
+                        foreach (string val in Model)
+                        {
+                            <p>@val.</p>
+                        }
+                }
+            </div>
+        </div>
+
+        <div class="col-sm-12 container">
+            <a asp-controller="Home" asp-action="Transfert" class="btn btn-success align-self-center" style="margin-top:20px;">Transferer</a>
+        </div>
+
+    </div>
+
+
+</div>

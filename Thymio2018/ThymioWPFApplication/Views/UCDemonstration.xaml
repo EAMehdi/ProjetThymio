@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="ThymioWPFApplication.Views.UCDemonstration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThymioWPFApplication.Views"
+             xmlns:VM="clr-namespace:ThymioWPFApplication.ViewModels.DemonstrationViewModels"
+             xmlns:V="clr-namespace:ThymioWPFApplication.Views.DemonstrationUserControl"         
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="LightGray">
+    
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type VM:ForwardBackwardViewModel}">
+            <V:UCForwardBackward/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type VM:TurnViewModel}">
+            <V:UCTurn/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type VM:SensorViewModel}">
+            <V:UCSensors/>
+        </DataTemplate>
+        <Style TargetType="Button" x:Key="functionButton">
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="0,5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <!--<Setter Property="BorderBrush" Value="#BEBFA3"/>
+                    <Setter Property="Background" Value="DarkCyan"/>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" MaxHeight="120" MinHeight="70"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="DarkRed" Padding="5" CornerRadius="10" Margin="20">
+            <Label >
+                <Hyperlink Command="{Binding HomeCommand}" TextDecorations="None" FontWeight="ExtraBlack" Foreground="Black">Acceuil</Hyperlink>
+            </Label>
+        </Border>
+
+        <!--Listing of the primitive function avalaible-->
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="SlateGray">
+            <Label Content="Fonctions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" Background="DarkSlateGray"/>
+            <Button Content="Avancer/Reculer" Style="{StaticResource functionButton}" Command="{Binding ChooseFunctionCommand}" CommandParameter="move"/>
+            <Button Content="Tourner" Style="{StaticResource functionButton}" Command="{Binding ChooseFunctionCommand}" CommandParameter="turn"/>
+            <Button Content="Capteurs" Style="{StaticResource functionButton}" Command="{Binding ChooseFunctionCommand}" CommandParameter="sensors"/>
+            <Button Content="Leds" IsEnabled="False" Cursor="No" Style="{StaticResource functionButton}" Command="" CommandParameter=""/>
+        </StackPanel>
+
+        <Border Grid.Column="1" Grid.Row="1" Background="GhostWhite" CornerRadius="10" Padding="5" >
+            <ContentPresenter Content="{Binding MyUserControlVM}" VerticalAlignment="Center"/>
+        </Border>
+        
+        
+        <!--Information about the transfert-->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="20,0">
+            <Border Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Margin="0">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Background="LightGreen" Margin="1,0">
+                        <Label Content="INFORMATIONS" FontWeight="Bold"  HorizontalContentAlignment="Center"/>
+                    </Border>
+
+                    <Border Background="GhostWhite"  BorderThickness="1" BorderBrush="Black"  CornerRadius="5" Margin="1,0" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Transfert :" FontWeight="ExtraBold" />
+                            <Label Content="{Binding TransfertState}" Style="{StaticResource CouleurLabelTransfert}" HorizontalContentAlignment="Center" Margin="0" FontWeight="UltraBold"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+     
+       
+        
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+ 
+            <Border Grid.Row="0" Background="LemonChiffon" Margin="10" Padding="5" CornerRadius="5">
+                <TabControl>
+                    <TabItem>
+                        <TabItem.Header>Instructions</TabItem.Header>
+                        <!--<StackPanel>
+                            <ListBox ItemsSource="{Binding ListInstruction}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Content="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>-->
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>Pseudo Code</TabItem.Header>
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding ListInstruction}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Content="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </TabItem>
+                    
+                    <TabItem>
+                        <TabItem.Header>Code</TabItem.Header>
+                        <ScrollViewer>
+                            <StackPanel>
+                                <ListBox ItemsSource="{Binding ListInstruction,UpdateSourceTrigger=PropertyChanged}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <Label Content="{Binding Code}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+
+            <StackPanel  VerticalAlignment="Bottom" HorizontalAlignment="Right"  Grid.Row="1" Orientation="Horizontal">
+                <Border Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red" Padding="5" CornerRadius="10" >
+                    <Label>
+                        <Hyperlink Command="{Binding ResetCodeCommand}" TextDecorations="None" FontWeight="ExtraBlack" Foreground="Black">Reset</Hyperlink>
+                    </Label>
+                </Border>
+                <Border Background="LightGreen" Padding="5" CornerRadius="10" Margin="20">
+                    <Label >
+                        <Hyperlink Command="{Binding TransfertCommand}" TextDecorations="None" FontWeight="ExtraBlack" Foreground="Black">Transfert</Hyperlink>
+                    </Label>
+                </Border>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+
+    <!--<DockPanel>
+        <StackPanel HorizontalAlignment="Right">
+       --><!--Transfert Notification that give an idea of the transfert process--><!--
+          
+        </StackPanel>
+    </DockPanel>-->
+</UserControl>

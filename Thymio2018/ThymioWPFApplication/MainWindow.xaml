@@ -1,0 +1,30 @@
+﻿<Window x:Class="ThymioWPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThymioWPFApplication"
+        
+        xmlns:Views="clr-namespace:ThymioWPFApplication.Views"
+        xmlns:VM="clr-namespace:ThymioWPFApplication.ViewModels"
+        mc:Ignorable="d"
+        Title="Thymio-2018" Height="600" Width="800">
+
+
+
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type VM:HomeViewModel}">
+            <Views:UCHome/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:ProgPageViewModel}">
+            <Views:UCProgPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:DemonstrationViewModel}">
+            <Views:UCDemonstration/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <ContentPresenter Content="{Binding CurrentViewModel}" />
+    
+</Window>

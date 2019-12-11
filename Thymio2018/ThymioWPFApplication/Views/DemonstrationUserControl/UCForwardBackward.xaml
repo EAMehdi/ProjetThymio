@@ -1,0 +1,57 @@
+﻿ <UserControl x:Class="ThymioWPFApplication.Views.DemonstrationUserControl.UCForwardBackward"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThymioWPFApplication.Views.DemonstrationUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="800"
+             >
+ 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Vitesse" FontWeight="UltraBold"/>
+            <Border Background="LightGray" Padding="5" CornerRadius="10" >
+                <TextBox Text="{Binding SpeedStr,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center"  MinWidth="50"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <!--<Label Content="cm" FontWeight="UltraBold"/>-->
+        </StackPanel>
+
+
+        <!--<Label Content="Distance:" VerticalContentAlignment="Center" FontWeight="ExtraBlack" Margin="20,0"/>-->
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Distance :" FontWeight="UltraBold"/>
+            <Border Background="LightGray" Padding="5" CornerRadius="10" Cursor="No">
+                <TextBox Text="{Binding SpeedStr}" AcceptsReturn="False" VerticalContentAlignment="Center" Cursor="No" IsEnabled="False" HorizontalContentAlignment="Center"  MinWidth="50"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Label Content="cm" FontWeight="UltraBold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Direction :" FontWeight="UltraBold"/>
+            <RadioButton GroupName="move" Content="Avancer" IsChecked="{Binding Direction}"/>
+            <RadioButton GroupName="move" Content="Reculer" />
+        </StackPanel>
+
+        <Border Grid.Column="3"   VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGreen" Padding="5" CornerRadius="10" >
+            <Label >
+                <Hyperlink Command="{Binding AddInstructionCommand}" TextDecorations="None" FontWeight="ExtraBlack" Foreground="Black">Ajouter</Hyperlink>
+            </Label>
+            <!--<Button Content="Ajouter" Command="{Binding AddInstructionCommand}"/>-->
+        </Border>
+
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<network>
+  <keyboards flag="true" />
+  <node nodeId="2349" name="Thymio-II">	var iterator
+	timer.period[0]=10000
+	onevent timer0
+		 iterator++
+	if iterator==1 then
+	motor.right.target=0
+	motor.left.target=0
+	end
+</node>
+</network>

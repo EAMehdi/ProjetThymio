@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="ThymioWPFApplication.Views.DemonstrationUserControl.UCSensors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThymioWPFApplication.Views.DemonstrationUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="S'abonner" FontWeight="UltraBold"/>
+            <Border Background="LightGray" Padding="0" CornerRadius="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" >
+                <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0"/>
+            </Border>
+            <!--<Label Content="cm" FontWeight="UltraBold"/>-->
+        </StackPanel>
+
+
+        <!--<Label Content="Distance:" VerticalContentAlignment="Center" FontWeight="ExtraBlack" Margin="20,0"/>-->
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Capteur :" FontWeight="UltraBold"/>
+            <!--<ListBox ItemsSource="{Binding SensorList}">
+                <ListBox.DataContext>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox  IsChecked="{Binding Mode=TwoWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.DataContext>
+            </ListBox>-->
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True"/>
+
+                <ListBox ItemsSource="{Binding SensorList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Val , Mode = TwoWay}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <!--<Label Content="Valeurs :" FontWeight="UltraBold"/>
+            <Border Background="LightGray" Padding="5" CornerRadius="10" >
+                <TextBox Text="{Binding SpeedStr}" AcceptsReturn="False" VerticalContentAlignment="Center" Cursor="No" IsEnabled="False" HorizontalContentAlignment="Center"  MinWidth="50"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>-->
+        </StackPanel>
+
+
+        <Border Grid.Column="2"   VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGreen" Padding="5" CornerRadius="10" >
+            <Label >
+                <Hyperlink Command="{Binding AddInstructionCommand}" TextDecorations="None" FontWeight="ExtraBlack" Foreground="Black">Valider</Hyperlink>
+            </Label>
+            <!--<Button Content="Ajouter" Command="{Binding AddInstructionCommand}"/>-->
+        </Border>
+
+
+    </Grid>
+</UserControl>
